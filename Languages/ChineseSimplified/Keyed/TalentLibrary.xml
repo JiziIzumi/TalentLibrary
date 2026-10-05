@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LanguageData>
+  <TL_BookBenefits>每60个阅读刻：双火随机一项20经验→单火随机一项15经验→通识总计15–20经验均分。双火、单火止于18；通识止于10。品质倍率0.5–2；每日4000经验后减速。</TL_BookBenefits>
+  <TL_Author>作者：{0}；成书知识：{1}</TL_Author>
+  <TL_InvalidTarget>需要一名活着的人形小人</TL_InvalidTarget>
+  <TL_AlreadyUnlocked>该小人已解开心灵限制</TL_AlreadyUnlocked>
+  <TL_AlreadyBrawler>目标已有近战爱好者</TL_AlreadyBrawler>
+  <TL_NoBrawler>目标没有近战爱好者</TL_NoBrawler>
+  <TL_UsedBook>{0}使用了特殊书籍。</TL_UsedBook>
+  <TL_ApplyBook>对小人使用</TL_ApplyBook>
+  <TL_ApplyBookDesc>选择一名目标小人，由可以操作书本的殖民者使用。书本会被消耗。</TL_ApplyBookDesc>
+  <TL_NoUser>没有能够操作书本并接近目标的殖民者</TL_NoUser>
+  <TL_NoTarget>没有可用目标</TL_NoTarget>
+  <TL_UseSelf>使用{0}</TL_UseSelf>
+  <TL_PhysicalRestriction>因身体状况或年龄暂时无法从事</TL_PhysicalRestriction>
+</LanguageData>

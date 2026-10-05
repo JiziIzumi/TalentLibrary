@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Talent Library｜天赋图书馆</name>
+  <author>Wentao Zeng</author>
+  <packageId>Wentao.TalentLibrary</packageId>
+  <supportedVersions><li>1.6</li></supportedVersions>
+  <modVersion>1.0.0</modVersion>
+  <modDependencies><li><packageId>brrainz.harmony</packageId><displayName>Harmony</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl></li></modDependencies>
+  <loadAfter><li>brrainz.harmony</li></loadAfter>
+  <description>一张书写台、一个两格书柜、一本通用技能书。优先培养双火至18，再培养单火至18，最后均分通识经验至10。作者知识决定品质，品质决定阅读效率。另有手动使用的心灵绘卷、寸长寸强书、寸短寸狠书。
+写书台与书籍素材来自用户提供的 Vanilla Books Expanded（Oskar Potocki、Taranchuk）。不需要 Vanilla Expanded Framework。</description>
+</ModMetaData>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LanguageData>
+  <TL_BookBenefits>Every 60 reading ticks: randomly train a major passion (+20 XP), then a minor passion (+15 XP), then distribute a total of 15–20 XP evenly. Passion skills stop at 18, general skills at 10. Quality multiplies XP by 0.5–2. Daily saturation applies above 4000 XP.</TL_BookBenefits>
+  <TL_Author>Author: {0}; knowledge when written: {1}</TL_Author>
+  <TL_InvalidTarget>Requires a living humanlike pawn</TL_InvalidTarget>
+  <TL_AlreadyUnlocked>This pawn has already unlocked all work</TL_AlreadyUnlocked>
+  <TL_AlreadyBrawler>Target already has Brawler</TL_AlreadyBrawler>
+  <TL_NoBrawler>Target does not have Brawler</TL_NoBrawler>
+  <TL_UsedBook>{0} used a special book.</TL_UsedBook>
+  <TL_ApplyBook>Use on pawn</TL_ApplyBook>
+  <TL_ApplyBookDesc>Select a target pawn. An available colonist will apply the book, consuming it.</TL_ApplyBookDesc>
+  <TL_NoUser>No colonist can use the book and reach the target</TL_NoUser>
+  <TL_NoTarget>No available target</TL_NoTarget>
+  <TL_UseSelf>Use {0}</TL_UseSelf>
+  <TL_PhysicalRestriction>Restricted by health or developmental age</TL_PhysicalRestriction>
+</LanguageData>

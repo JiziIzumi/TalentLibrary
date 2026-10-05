@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BenchBase">
+    <defName>TL_WritingTable</defName><label>书写台</label>
+    <description>整理亲身经验、编写通用技能书的书写台。只生产通用技能书；作者的智识与最高四项可用技能共同决定书本品质。</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <graphicData><texPath>Things/Building/WritingTable</texPath><graphicClass>Graphic_Multi</graphicClass><drawSize>(3.5,1.5)</drawSize></graphicData>
+    <costList><WoodLog>120</WoodLog></costList>
+    <statBases><WorkToBuild>2000</WorkToBuild><MaxHitPoints>180</MaxHitPoints><Flammability>1</Flammability></statBases>
+    <size>(3,1)</size><designationCategory>Production</designationCategory>
+    <passability>PassThroughOnly</passability><pathCost>70</pathCost><fillPercent>0.5</fillPercent>
+    <hasInteractionCell>true</hasInteractionCell><interactionCellOffset>(0,0,-1)</interactionCellOffset><surfaceType>Item</surfaceType>
+    <inspectorTabs><li>ITab_Bills</li></inspectorTabs>
+    <building><spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity></building>
+    <placeWorkers><li>PlaceWorker_PreventInteractionSpotOverlap</li></placeWorkers>
+    <researchPrerequisites><li>TL_WritingTech</li></researchPrerequisites>
+  </ThingDef>
+  <ThingDef ParentName="BookcaseBase">
+    <defName>TL_Bookcase</defName><label>两格图书柜</label>
+    <description>占地两格，可存放并展示十本书。采用原版书柜储存机制，书本不会在柜内劣化，并提供原版书柜的环境与阅读收益。</description>
+    <graphicData><texPath>Things/Building/Furniture/Bookcase/Bookcase</texPath><graphicClass>Graphic_Multi</graphicClass><drawSize>(3,2)</drawSize></graphicData>
+    <costStuffCount>40</costStuffCount>
+    <statBases><MaxHitPoints>140</MaxHitPoints><Mass>10</Mass><WorkToBuild>900</WorkToBuild><Beauty>4</Beauty></statBases>
+    <size>(2,1)</size>
+    <building>
+      <maxItemsInCell>5</maxItemsInCell>
+      <bookendGraphicEast><texPath>Things/Building/Furniture/Bookcase/Bookcase_Bookend_east</texPath><graphicClass>Graphic_Single</graphicClass><addTopAltitudeBias>true</addTopAltitudeBias><drawSize>(2,3)</drawSize></bookendGraphicEast>
+      <bookendGraphicNorth><texPath>Things/Building/Furniture/Bookcase/Bookcase_Bookend_north</texPath><graphicClass>Graphic_Single</graphicClass><addTopAltitudeBias>true</addTopAltitudeBias><drawSize>(3,2)</drawSize></bookendGraphicNorth>
+    </building>
+  </ThingDef>
+  <ResearchProjectDef>
+    <defName>TL_WritingTech</defName><label>知识编纂</label><description>将殖民者的知识写成书籍，建立能因材施教的图书馆。</description>
+    <baseCost>700</baseCost><techLevel>Medieval</techLevel>
+    <researchViewX>0</researchViewX><researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+</Defs>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/TraderKindDef[defName="Caravan_Outlander_Exotic" or defName="Orbital_Exotic"]/stockGenerators</xpath>
+    <value>
+      <li Class="StockGenerator_Tag"><tradeTag>TL_SpecialBook</tradeTag><thingDefCountRange>0~2</thingDefCountRange><countRange>1</countRange></li>
+      <li Class="StockGenerator_BuyTradeTag"><tag>TL_SpecialBook</tag></li>
+    </value>
+  </Operation>
+</Patch>

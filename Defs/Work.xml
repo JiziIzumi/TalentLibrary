@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <WorkTypeDef><defName>TL_Writing</defName><labelShort>写作</labelShort><pawnLabel>作者</pawnLabel><gerundLabel>写书</gerundLabel><description>在书写台整理经验，编写通用技能书。</description><verb>写书</verb><naturalPriority>51</naturalPriority><relevantSkills><li>Intellectual</li></relevantSkills><workTags><li>Intellectual</li></workTags></WorkTypeDef>
+  <WorkTypeDef><defName>TL_Reading</defName><labelShort>阅读</labelShort><pawnLabel>读者</pawnLabel><gerundLabel>读书</gerundLabel><description>按自己的天赋主动阅读通用技能书。双火优先，再单火，最后通识。</description><verb>读书</verb><naturalPriority>20</naturalPriority><workTags><li>Intellectual</li></workTags></WorkTypeDef>
+  <WorkGiverDef><defName>TL_WriteWorkGiver</defName><label>编写技能书</label><giverClass>WorkGiver_DoBill</giverClass><workType>TL_Writing</workType><priorityInType>100</priorityInType><fixedBillGiverDefs><li>TL_WritingTable</li></fixedBillGiverDefs><verb>写书</verb><gerund>写书</gerund><requiredCapacities><li>Manipulation</li><li>Sight</li></requiredCapacities><prioritizeSustains>true</prioritizeSustains></WorkGiverDef>
+  <WorkGiverDef><defName>TL_ReadWorkGiver</defName><label>阅读通用技能书</label><giverClass>TalentLibrary.WorkGiver_Study</giverClass><workType>TL_Reading</workType><priorityInType>100</priorityInType><scanThings>false</scanThings><verb>阅读</verb><gerund>读书</gerund><requiredCapacities><li>Manipulation</li><li>Sight</li></requiredCapacities></WorkGiverDef>
+  <JobDef><defName>TL_Read</defName><driverClass>TalentLibrary.JobDriver_Study</driverClass><reportString>正在阅读TargetA。</reportString><joyKind>Reading</joyKind><joyDuration>2500</joyDuration><casualInterruptible>true</casualInterruptible><checkOverrideOnDamage>Always</checkOverrideOnDamage></JobDef>
+  <JobDef><defName>TL_ApplySpecialBook</defName><driverClass>TalentLibrary.JobDriver_ApplySpecialBook</driverClass><reportString>正在对TargetB使用TargetA。</reportString><checkOverrideOnDamage>Always</checkOverrideOnDamage></JobDef>
+  <RecipeDef>
+    <defName>TL_WriteBook</defName><label>编写通用技能书</label><description>用布装订一本通用技能书。作者知识越丰富，写出高品质书的机会越大。</description><jobString>正在编写通用技能书。</jobString>
+    <workAmount>60000</workAmount><workSpeedStat>ResearchSpeed</workSpeedStat><workSkill>Intellectual</workSkill><workSkillLearnFactor>0.3</workSkillLearnFactor>
+    <unfinishedThingDef>TL_UnfinishedBook</unfinishedThingDef><effectWorking>Sculpt</effectWorking>
+    <ingredients><li><filter><thingDefs><li>Cloth</li></thingDefs></filter><count>50</count></li></ingredients>
+    <fixedIngredientFilter><thingDefs><li>Cloth</li></thingDefs></fixedIngredientFilter>
+    <products><TL_UniversalBook>1</TL_UniversalBook></products><recipeUsers><li>TL_WritingTable</li></recipeUsers>
+  </RecipeDef>
+</Defs>

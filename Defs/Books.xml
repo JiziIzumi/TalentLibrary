@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BookBase">
+    <defName>TL_UniversalBook</defName><label>通用技能书</label>
+    <description>根据读者自己的天赋培养技能。双火优先读到18，然后单火读到18，最后将通识经验平均分配给低于10的可用技能。品质越高，经验越多。</description>
+    <graphicData><texPath>Things/Books/Universal</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.7</drawSize></graphicData>
+    <statBases><MaxHitPoints>80</MaxHitPoints><Mass>0.5</Mass><MarketValue>180</MarketValue><Flammability>1</Flammability><WorkToMake>60000</WorkToMake></statBases>
+    <comps Inherit="false">
+      <li Class="CompProperties_Forbiddable"/>
+      <li><compClass>CompQuality</compClass></li>
+      <li Class="CompProperties_Book">
+        <nameMaker>TL_BookName</nameMaker><descriptionMaker>TL_BookDescription</descriptionMaker><ageYearsRange>0</ageYearsRange><pickWeight>0.35</pickWeight>
+        <openGraphic><texPath>Things/Books/UniversalOpen</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.7</drawSize></openGraphic>
+        <verticalGraphic><texPath>Things/Books/Universal</texPath><graphicClass>Graphic_Single</graphicClass><addTopAltitudeBias>true</addTopAltitudeBias><drawSize>0.5</drawSize></verticalGraphic>
+        <doers><li Class="TalentLibrary.BookOutcomeProperties_Talent"/></doers>
+      </li>
+      <li Class="TalentLibrary.CompProperties_UniversalBook"/>
+    </comps>
+  </ThingDef>
+  <ThingDef ParentName="UnfinishedBase">
+    <defName>TL_UnfinishedBook</defName><label>未完成的书稿</label><description>仍在整理、尚未装订的通用技能书。</description>
+    <graphicData><texPath>Things/Books/Unfinished</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stuffCategories Inherit="false"/>
+  </ThingDef>
+  <ThingDef Name="TL_SpecialBookBase" ParentName="ResourceBase" Abstract="True">
+    <thingClass>ThingWithComps</thingClass><stackLimit>1</stackLimit>
+    <thingCategories Inherit="false"><li>Items</li></thingCategories>
+    <statBases><MaxHitPoints>80</MaxHitPoints><Mass>0.4</Mass><Flammability>1</Flammability><DeteriorationRate>0.5</DeteriorationRate></statBases>
+    <tradeability>All</tradeability><tradeTags><li>TL_SpecialBook</li></tradeTags>
+  </ThingDef>
+  <ThingDef ParentName="TL_SpecialBookBase">
+    <defName>TL_MindScroll</defName><label>心灵绘卷</label>
+    <description>一次性使用。永久解开目标的工作与技能禁用，保留背景、特性与已有技能。不会治疗伤病，也不会恢复缺失肢体。选中书本并点击“对小人使用”。</description>
+    <graphicData><texPath>Things/Books/Mind</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.7</drawSize></graphicData>
+    <statBases><MarketValue>1800</MarketValue></statBases>
+    <comps><li Class="TalentLibrary.CompProperties_SpecialBook"><effect>UnlockWork</effect></li></comps>
+  </ThingDef>
+  <ThingDef ParentName="TL_SpecialBookBase">
+    <defName>TL_LongBook</defName><label>寸长寸强书</label>
+    <description>一次性使用。移除目标的“近战爱好者”特性。目标没有该特性时不能使用；不会倒推或恢复技能经验。</description>
+    <graphicData><texPath>Things/Books/Long</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.7</drawSize></graphicData>
+    <statBases><MarketValue>650</MarketValue></statBases>
+    <comps><li Class="TalentLibrary.CompProperties_SpecialBook"><effect>RemoveBrawler</effect></li></comps>
+  </ThingDef>
+  <ThingDef ParentName="TL_SpecialBookBase">
+    <defName>TL_ShortBook</defName><label>寸短寸狠书</label>
+    <description>一次性使用。获得原版“近战爱好者”特性。已有该特性时不能使用；不会删除其他特性。</description>
+    <graphicData><texPath>Things/Books/Short</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>0.7</drawSize></graphicData>
+    <statBases><MarketValue>650</MarketValue></statBases>
+    <comps><li Class="TalentLibrary.CompProperties_SpecialBook"><effect>AddBrawler</effect></li></comps>
+  </ThingDef>
+  <HediffDef>
+    <defName>TL_WorkUnlocked</defName><label>心灵解放</label><description>通过心灵绘卷永久解开了工作与技能禁用。</description>
+    <hediffClass>TalentLibrary.Hediff_WorkUnlocked</hediffClass><isBad>false</isBad><initialSeverity>1</initialSeverity><scenarioCanAdd>false</scenarioCanAdd><everCurableByItem>false</everCurableByItem>
+  </HediffDef>
+  <RulePackDef><defName>TL_BookName</defName><rulePack><rulesStrings><li>title->通用技能书</li></rulesStrings></rulePack></RulePackDef>
+  <RulePackDef><defName>TL_BookDescription</defName><rulePack><rulesStrings><li>desc->作者将多年的实践经验整理成册。读者会先沿着自己最擅长的方向深入学习，再补足其他领域的基础知识。</li></rulesStrings></rulePack></RulePackDef>
+</Defs>
