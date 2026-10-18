@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory=$true)][string]$SavedataFolder,
     [Parameter(Mandatory=$true)][string]$GameModFolder,
     [Parameter(Mandatory=$true)][string]$CandidateDll,
+    [Parameter(Mandatory=$true)][string]$CandidateAboutXml,
     [int]$TimeoutSeconds = 180
 )
 
@@ -11,10 +12,13 @@ $gameExePath = [System.IO.Path]::GetFullPath($GameExe)
 $savedataPath = [System.IO.Path]::GetFullPath($SavedataFolder)
 $gameModPath = [System.IO.Path]::GetFullPath($GameModFolder)
 $candidatePath = [System.IO.Path]::GetFullPath($CandidateDll)
+$candidateAboutPath = [System.IO.Path]::GetFullPath($CandidateAboutXml)
 $modsConfigPath = Join-Path $savedataPath 'Config\ModsConfig.xml'
 $gameModDll = Join-Path $gameModPath 'Assemblies\TalentLibrary.dll'
+$gameModAbout = Join-Path $gameModPath 'About\About.xml'
 $backupFolder = Join-Path $savedataPath 'staged-original'
 $backupDll = Join-Path $backupFolder 'TalentLibrary.dll'
+$backupAbout = Join-Path $backupFolder 'About.xml'
 $testLog = Join-Path $savedataPath 'Player.log'
 $sharedLogFolder = Join-Path $env:USERPROFILE 'AppData\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Logs'
 $sharedLog = Join-Path $sharedLogFolder 'Player.log'
@@ -22,7 +26,7 @@ $sharedPreviousLog = Join-Path $sharedLogFolder 'Player-prev.log'
 $backupSharedLog = Join-Path $backupFolder 'Player.log.before-test'
 $backupSharedPreviousLog = Join-Path $backupFolder 'Player-prev.log.before-test'
 
-foreach ($path in @($gameExePath, $modsConfigPath, $gameModDll, $candidatePath, $sharedLogFolder)) {
+foreach ($path in @($gameExePath, $modsConfigPath, $gameModDll, $gameModAbout, $candidatePath, $candidateAboutPath, $sharedLogFolder)) {
     if (-not (Test-Path -LiteralPath $path)) { throw "Required test path not found: $path" }
 }
 
@@ -37,6 +41,7 @@ New-Item -ItemType Directory -Path $backupFolder -Force | Out-Null
 $hadSharedLog = Test-Path -LiteralPath $sharedLog
 $hadSharedPreviousLog = Test-Path -LiteralPath $sharedPreviousLog
 Copy-Item -LiteralPath $gameModDll -Destination $backupDll -Force
+Copy-Item -LiteralPath $gameModAbout -Destination $backupAbout -Force
 if ($hadSharedLog) { Copy-Item -LiteralPath $sharedLog -Destination $backupSharedLog -Force }
 if ($hadSharedPreviousLog) { Copy-Item -LiteralPath $sharedPreviousLog -Destination $backupSharedPreviousLog -Force }
 $process = $null
@@ -46,6 +51,11 @@ try {
     if ((Get-FileHash -LiteralPath $candidatePath -Algorithm SHA256).Hash -ne
         (Get-FileHash -LiteralPath $gameModDll -Algorithm SHA256).Hash) {
         throw 'Staged game DLL does not match the candidate DLL'
+    }
+    Copy-Item -LiteralPath $candidateAboutPath -Destination $gameModAbout -Force
+    if ((Get-FileHash -LiteralPath $candidateAboutPath -Algorithm SHA256).Hash -ne
+        (Get-FileHash -LiteralPath $gameModAbout -Algorithm SHA256).Hash) {
+        throw 'Staged game About.xml does not match the candidate About.xml'
     }
     foreach ($logPath in @($sharedLog, $sharedPreviousLog, $testLog)) {
         if (Test-Path -LiteralPath $logPath) { Remove-Item -LiteralPath $logPath -Force }
@@ -73,6 +83,9 @@ try {
     if ($errors.Count -gt 0) {
         $errors | Write-Output
         throw 'Talent Library errors were found during isolated mod initialization'
+    }
+    if ($log -match 'Wentao\.TalentLibrary \(incompatible version\)') {
+        throw 'Isolated game reports Talent Library as incompatible with RimWorld 1.7'
     }
     Write-Output 'PASS RimWorld 1.7.4981 Talent Library startup'
 }
@@ -103,7 +116,12 @@ finally {
             }
         }
         finally {
-            Copy-Item -LiteralPath $backupDll -Destination $gameModDll -Force
+            try {
+                Copy-Item -LiteralPath $backupDll -Destination $gameModDll -Force
+            }
+            finally {
+                Copy-Item -LiteralPath $backupAbout -Destination $gameModAbout -Force
+            }
         }
     }
 }
