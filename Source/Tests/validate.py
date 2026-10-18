@@ -16,5 +16,6 @@ assert defs['TL_ShortBook'].find('.//effect').text=='AddBrawler'
 for name in ['TL_MindScroll','TL_LongBook','TL_ShortBook']:
  assert defs[name].get('ParentName')=='TL_SpecialBookBase','Special books cannot inherit readable BookBase'
 assert (root/'Assemblies/TalentLibrary.dll').exists(),'Missing compiled DLL'
-for n in E.parse(root/'About/About.xml').getroot().find('supportedVersions'): assert n.text=='1.6'
+supported = [n.text for n in E.parse(root/'About/About.xml').getroot().find('supportedVersions')]
+assert supported == ['1.6', '1.7'], 'Mod must declare RimWorld 1.6 and 1.7 support'
 print('PASS XML gameplay contract:',len(files),'files;',len(defs),'definitions')

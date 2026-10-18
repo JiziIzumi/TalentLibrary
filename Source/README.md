@@ -16,4 +16,6 @@ mono /tmp/TalentLibraryRulesTests.exe
 python3 Tests/validate.py
 ```
 
-成品DLL在本环境以Mono编译器编译，通过同版本RimRef与Harmony引用。项目文件提供.NET SDK重新构建入口，该入口未在本环境执行（未安装.NET SDK）。
+项目支持 .NET SDK 重新构建，目标为 net472，并按固定版本的 RimWorld 参考程序集编译。本次修改已使用 .NET SDK 8.0 构建。
+
+兼容性：单份 DLL 按 RimWorld 1.6.4633 参考程序集构建，Mod 声明并支持 RimWorld 1.6 与 1.7。
