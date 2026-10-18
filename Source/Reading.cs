@@ -189,12 +189,12 @@ namespace TalentLibrary
     [HarmonyPatch(typeof(Pawn_SkillTracker), nameof(Pawn_SkillTracker.Learn))]
     public static class Patch_NoExtraIntellectual
     {
-        public static bool Prefix(Pawn_SkillTracker __instance, SkillDef s, float xp)
+        public static bool Prefix(Pawn_SkillTracker __instance, SkillDef __0, float __1)
         {
             // Vanilla's recreational Reading adds Intellectual XP on every tick.
             // Our direct SkillRecord awards never pass through this tracker method.
             var pawn = __instance.GetSkill(SkillDefOf.Intellectual).Pawn;
-            return s != SkillDefOf.Intellectual || xp <= 0f || pawn.CurJobDef != JobDefOf.Reading ||
+            return __0 != SkillDefOf.Intellectual || __1 <= 0f || pawn.CurJobDef != JobDefOf.Reading ||
                 pawn.CurJob.targetA.Thing == null || pawn.CurJob.targetA.Thing.TryGetComp<CompUniversalBook>() == null;
         }
     }
